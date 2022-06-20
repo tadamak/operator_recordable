@@ -6,6 +6,16 @@ RSpec.describe OperatorRecordable::Store do
   describe ".fetch" do
     subject { described_class.fetch(name) }
 
+    context "when :current_attributes_store is passed" do
+      let(:name) { :current_attributes_store }
+
+      if defined? ::ActiveSupport::CurrentAttributes
+        it { is_expected.to eq OperatorRecordable::CurrentAttributesStore }
+      else
+        it { expect { subject }.to raise_error KeyError }
+      end
+    end
+
     context "when :thread_store is passed" do
       let(:name) { :thread_store }
 
@@ -17,16 +27,6 @@ RSpec.describe OperatorRecordable::Store do
 
       if defined? ::RequestStore
         it { is_expected.to eq OperatorRecordable::RequestStore }
-      else
-        it { expect { subject }.to raise_error KeyError }
-      end
-    end
-
-    context "when :current_attributes_store is passed" do
-      let(:name) { :current_attributes_store }
-
-      if defined? ::ActiveSupport::CurrentAttributes
-        it { is_expected.to eq OperatorRecordable::CurrentAttributesStore }
       else
         it { expect { subject }.to raise_error KeyError }
       end

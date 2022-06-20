@@ -1,5 +1,10 @@
 ## Unreleased
 
+### Breaking changes
+
+* Change the default store from `:thread_store` to `:current_attributes_store`
+  + [PR#xx]()
+
 ### Misc
 
 * Change the default branch from master to main

@@ -13,6 +13,6 @@ module OperatorRecordable
   end
 end
 
+require "operator_recordable/store/current_attributes_store"
 require "operator_recordable/store/thread_store"
 require "operator_recordable/store/request_store" if defined? ::RequestStore
-require "operator_recordable/store/current_attributes_store"

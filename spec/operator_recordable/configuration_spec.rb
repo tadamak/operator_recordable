@@ -9,7 +9,13 @@ RSpec.describe OperatorRecordable::Configuration do
     context "when store is not specified" do
       let(:config) { {} }
 
-      it { is_expected.to be_an_instance_of OperatorRecordable::ThreadStore }
+      it { is_expected.to be_an_instance_of OperatorRecordable::CurrentAttributesStore }
+    end
+
+    context "when store is :current_attributes_store" do
+      let(:config) { { store: :current_attributes_store } }
+
+      it { is_expected.to be_an_instance_of OperatorRecordable::CurrentAttributesStore }
     end
 
     context "when store is :thread_store" do
@@ -26,12 +32,6 @@ RSpec.describe OperatorRecordable::Configuration do
       else
         it { expect { subject }.to raise_error KeyError }
       end
-    end
-
-    context "when store is :current_attributes_store" do
-      let(:config) { { store: :current_attributes_store } }
-
-      it { is_expected.to be_an_instance_of OperatorRecordable::CurrentAttributesStore }
     end
   end
 
